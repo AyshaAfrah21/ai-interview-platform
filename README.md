@@ -33,32 +33,35 @@ AI Mock Interview Platform is a full-stack web application that helps job seeker
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Backend | Python, FastAPI |
-| AI | Google Gemini 1.5 Flash |
-| Database | SQLite + SQLAlchemy ORM |
+| Layer          | Technology                           |
+| -------------- | ------------------------------------ |
+| Backend        | Python, FastAPI                      |
+| AI             | Google Gemini 1.5 Flash              |
+| Database       | SQLite + SQLAlchemy ORM              |
 | Authentication | JWT (python-jose) + bcrypt (passlib) |
-| Frontend | HTML, CSS, JavaScript |
-| Deployment | Railway |
+| Frontend       | HTML, CSS, JavaScript                |
+| Deployment     | Railway                              |
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Python 3.10 or higher
 - A free [Google Gemini API key](https://aistudio.google.com)
 
 ### Installation
 
 **1. Clone the repository**
+
 ```bash
 git clone https://github.com/YOUR_GITHUB_USERNAME/ai-interview-platform.git
 cd ai-interview-platform
 ```
 
 **2. Install dependencies**
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -66,17 +69,20 @@ pip install -r requirements.txt
 **3. Set up environment variables**
 
 Create a `.env` file in the root folder:
+
 ```
 GEMINI_API_KEY=your_gemini_api_key_here
 SECRET_KEY=any_random_secret_string_here
 ```
 
 **4. Run the app**
+
 ```bash
 uvicorn main:app --reload
 ```
 
 **5. Open in browser**
+
 ```
 http://localhost:8000
 ```
@@ -106,19 +112,19 @@ ai-interview-platform/
 
 ## 🔌 API Reference
 
-| Method | Endpoint | Description | Auth Required |
-|---|---|---|---|
-| POST | `/api/signup` | Register a new user | No |
-| POST | `/api/login` | Login and receive JWT token | No |
-| POST | `/api/get-question` | Generate an interview question | Yes |
-| POST | `/api/submit-answer` | Submit answer and get AI feedback | Yes |
-| GET | `/api/history` | Fetch past interview sessions | Yes |
+| Method | Endpoint             | Description                       | Auth Required |
+| ------ | -------------------- | --------------------------------- | ------------- |
+| POST   | `/api/signup`        | Register a new user               | No            |
+| POST   | `/api/login`         | Login and receive JWT token       | No            |
+| POST   | `/api/get-question`  | Generate an interview question    | Yes           |
+| POST   | `/api/submit-answer` | Submit answer and get AI feedback | Yes           |
+| GET    | `/api/history`       | Fetch past interview sessions     | Yes           |
 
 ---
 
 ## 📸 Screenshots
 
-*Coming soon after deployment*
+_Coming soon after deployment_
 
 ---
 
@@ -136,8 +142,8 @@ ai-interview-platform/
 
 **YOUR_FULL_NAME**
 
-- GitHub: [@YOUR_GITHUB_USERNAME](https://github.com/AyshaAfrah21)
-- LinkedIn: [YOUR_LINKEDIN_URL](www.linkedin.com/in/ayshaafrah)
+- GitHub: [@AyshaAfrah21](https://github.com/AyshaAfrah21)
+- LinkedIn: [Aysha Afrah](www.linkedin.com/in/ayshaafrah)
 
 ---
 
