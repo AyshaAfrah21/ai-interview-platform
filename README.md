@@ -140,10 +140,8 @@ _Coming soon after deployment_
 
 ## 🙋 Author
 
-**YOUR_FULL_NAME**
+**Aysha Afrah Ziya**
 
-- GitHub: [@AyshaAfrah21](https://github.com/AyshaAfrah21)
-- LinkedIn: [Aysha Afrah Ziya](www.linkedin.com/in/ayshaafrah)
 
 ---
 
