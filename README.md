@@ -9,7 +9,7 @@
 ![Gemini](https://img.shields.io/badge/Google%20Gemini-AI-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 
-**[Live Demo →](https://your-railway-url.up.railway.app)**
+**[Live Demo →](https://ai-interview-platform-web.up.railway.app)**
 
 </div>
 
