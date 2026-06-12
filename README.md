@@ -37,10 +37,10 @@ AI Mock Interview Platform is a full-stack web application that helps job seeker
 | -------------- | ------------------------------------ |
 | Backend        | Python, FastAPI                      |
 | AI             | Google Gemini 1.5 Flash              |
-| Database       | SQLite + SQLAlchemy ORM              |
+| Database       | PostgreSQL                           |
 | Authentication | JWT (python-jose) + bcrypt (passlib) |
 | Frontend       | HTML, CSS, JavaScript                |
-| Deployment     | Railway                              |
+
 
 ---
 
