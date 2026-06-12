@@ -7,7 +7,7 @@
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![Gemini](https://img.shields.io/badge/Google%20Gemini-AI-4285F4?style=for-the-badge&logo=google&logoColor=white)
-![PostgreSQL ](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=PostgreSQL&logoColor=white)
+![PostgreSQL ](https://img.shields.io/badge/PostgreSQL-Database-003B57?style=for-the-badge&logo=PostgreSQL&logoColor=white)
 
 **[Live Demo →](https://ai-interview-platform-web.up.railway.app)**
 
