@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Interview</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span class="logo">🎯 AI Interviews</span>
+    <button class="btn-small" onclick="window.location.href='/dashboard'">← Back</button>
+  </nav>
+
+  <div class="container">
+    <div id="loading-screen" class="center-screen">
+      <div class="spinner"></div>
+      <p>Generating your question...</p>
+    </div>
+
+    <div id="question-screen" style="display:none">
+      <div class="role-badge" id="role-badge"></div>
+      <div class="card">
+        <h3>Question</h3>
+        <p id="question-text" class="question-text"></p>
+      </div>
+
+      <div class="card">
+        <h3>Your Answer</h3>
+        <textarea id="answer-box" rows="8" placeholder="Type your answer here..."></textarea>
+        <button class="btn-primary" onclick="submitAnswer()">Submit for AI Feedback →</button>
+      </div>
+    </div>
+
+    <div id="feedback-screen" style="display:none">
+      <div class="card">
+        <h3>AI Feedback</h3>
+        <div class="score-circle" id="score-display"></div>
+        <div class="feedback-section">
+          <p><strong>Feedback:</strong> <span id="fb-feedback"></span></p>
+          <p><strong>✅ Strengths:</strong> <span id="fb-strengths"></span></p>
+          <p><strong>📈 Improve:</strong> <span id="fb-improvements"></span></p>
+        </div>
+        <button class="btn-primary" onclick="window.location.href='/dashboard'">Back to Dashboard</button>
+        <button class="btn-secondary" onclick="location.reload()">Try Another Question</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const token = localStorage.getItem('token');
+    if (!token) window.location.href = '/';
+
+    const role = localStorage.getItem('role');
+    const difficulty = localStorage.getItem('difficulty');
+    let sessionId = null;
+
+    document.getElementById('role-badge').textContent = role + ' · ' + difficulty;
+
+    async function loadQuestion() {
+      const res = await fetch('/api/get-question', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ role, difficulty })
+      });
+      const data = await res.json();
+      sessionId = data.session_id;
+      document.getElementById('question-text').textContent = data.question;
+      document.getElementById('loading-screen').style.display = 'none';
+      document.getElementById('question-screen').style.display = 'block';
+    }
+
+    async function submitAnswer() {
+      const answer = document.getElementById('answer-box').value.trim();
+      if (!answer) { alert('Please write an answer first!'); return; }
+
+      document.getElementById('question-screen').style.display = 'none';
+      document.getElementById('loading-screen').style.display = 'flex';
+
+      const res = await fetch('/api/submit-answer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({ session_id: sessionId, answer })
+      });
+      const data = await res.json();
+
+      document.getElementById('loading-screen').style.display = 'none';
+      document.getElementById('feedback-screen').style.display = 'block';
+      document.getElementById('score-display').textContent = data.score + '/100';
+      document.getElementById('score-display').className = 'score-circle ' +
+        (data.score >= 70 ? 'score-green' : data.score >= 40 ? 'score-yellow' : 'score-red');
+      document.getElementById('fb-feedback').textContent = data.feedback;
+      document.getElementById('fb-strengths').textContent = data.strengths;
+      document.getElementById('fb-improvements').textContent = data.improvements;
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>

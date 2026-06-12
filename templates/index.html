@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Interview Platform</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="auth-container">
+    <h1>🎯 AI Interview Platform</h1>
+    <p class="subtitle">Practice interviews with AI feedback</p>
+
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('login')">Login</button>
+      <button class="tab" onclick="showTab('signup')">Sign Up</button>
+    </div>
+
+    <div id="login-form">
+      <input type="email" id="login-email" placeholder="Email" />
+      <input type="password" id="login-password" placeholder="Password" />
+      <button class="btn-primary" onclick="login()">Login</button>
+    </div>
+
+    <div id="signup-form" style="display:none">
+      <input type="text" id="signup-name" placeholder="Full Name" />
+      <input type="email" id="signup-email" placeholder="Email" />
+      <input type="password" id="signup-password" placeholder="Password (min 6 chars)" />
+      <button class="btn-primary" onclick="signup()">Create Account</button>
+    </div>
+
+    <p id="auth-error" class="error-msg"></p>
+  </div>
+
+  <script>
+    function showTab(tab) {
+      document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
+      document.getElementById('signup-form').style.display = tab === 'signup' ? 'block' : 'none';
+      document.querySelectorAll('.tab').forEach((t, i) => {
+        t.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'signup'));
+      });
+    }
+
+    async function login() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('name', data.name);
+        window.location.href = '/dashboard';
+      } else {
+        document.getElementById('auth-error').textContent = data.detail;
+      }
+    }
+
+    async function signup() {
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ name, email, password })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('name', data.name);
+        window.location.href = '/dashboard';
+      } else {
+        document.getElementById('auth-error').textContent = data.detail;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span class="logo">🎯 AI Interviews</span>
+    <span id="user-name"></span>
+    <button class="btn-small" onclick="logout()">Logout</button>
+  </nav>
+
+  <div class="container">
+    <h2>Start a New Interview</h2>
+    <div class="card">
+      <label>Job Role</label>
+      <select id="role">
+        <option>Software Engineer</option>
+        <option>Data Scientist</option>
+        <option>Product Manager</option>
+        <option>Frontend Developer</option>
+        <option>Backend Developer</option>
+        <option>DevOps Engineer</option>
+      </select>
+
+      <label>Difficulty</label>
+      <select id="difficulty">
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+      </select>
+
+      <button class="btn-primary" onclick="startInterview()">Start Interview →</button>
+    </div>
+
+    <h2>Past Sessions</h2>
+    <div id="history-list"></div>
+  </div>
+
+  <script>
+    const token = localStorage.getItem('token');
+    if (!token) window.location.href = '/';
+    document.getElementById('user-name').textContent = 'Hi, ' + localStorage.getItem('name');
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = '/';
+    }
+
+    function startInterview() {
+      const role = document.getElementById('role').value;
+      const difficulty = document.getElementById('difficulty').value;
+      localStorage.setItem('role', role);
+      localStorage.setItem('difficulty', difficulty);
+      window.location.href = '/interview';
+    }
+
+    async function loadHistory() {
+      const res = await fetch('/api/history', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      const sessions = await res.json();
+      const list = document.getElementById('history-list');
+      if (sessions.length === 0) {
+        list.innerHTML = '<p class="muted">No sessions yet. Start your first interview!</p>';
+        return;
+      }
+      list.innerHTML = sessions.map(s => `
+        <div class="history-card">
+          <div class="history-header">
+            <strong>${s.role}</strong>
+            <span class="badge ${s.score >= 70 ? 'badge-green' : s.score >= 40 ? 'badge-yellow' : 'badge-red'}">${s.score ?? 'N/A'}/100</span>
+          </div>
+          <p class="muted">${s.difficulty} · ${new Date(s.date).toLocaleDateString()}</p>
+          <p>${s.question}</p>
+          <p class="feedback">${s.feedback ?? ''}</p>
+        </div>
+      `).join('');
+    }
+
+    loadHistory();
+  </script>
+</body>
+</html>
