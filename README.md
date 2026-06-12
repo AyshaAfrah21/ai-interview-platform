@@ -143,7 +143,7 @@ _Coming soon after deployment_
 **YOUR_FULL_NAME**
 
 - GitHub: [@AyshaAfrah21](https://github.com/AyshaAfrah21)
-- LinkedIn: [Aysha Afrah](www.linkedin.com/in/ayshaafrah)
+- LinkedIn: [Aysha Afrah Ziya](www.linkedin.com/in/ayshaafrah)
 
 ---
 
